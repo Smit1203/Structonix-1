@@ -20,7 +20,7 @@ export function MainNavbar() {
         <nav className="bg-white shadow-sm sticky top-0 z-50">
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between">
-                    {/* Logo & Grid Icon */}
+                    {/* Logo & Grid Icon + values */}
                     <div className="flex items-center gap-4 py-5">
                         <Link href="/" className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-primary flex items-center justify-center">
