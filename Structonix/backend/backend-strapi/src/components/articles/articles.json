@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_articles_articles",
+  "info": {
+    "displayName": "Articles",
+    "icon": "arrowDown"
+  },
+  "options": {},
+  "attributes": {
+    "Titile": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}
