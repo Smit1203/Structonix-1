@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Slider from 'react-slick';
 import Link from 'next/link';
 import { ArrowRight, Play } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // Import css files for slick-carousel (must be imported here or in global css)
 import 'slick-carousel/slick/slick.css';
@@ -135,41 +136,88 @@ export function HomepageBanner() {
 
                                 {/* Main Text Content */}
                                 <div className="w-full lg:w-full flex flex-col justify-center text-white pl-8 md:pl-0">
-                                    <div className={`transition-all duration-700 delay-200 ${index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                                        <h1 className="text-4xl md:text-5xl lg:text-[64px] font-bold leading-[1.1] mb-6 font-sans">
-                                            {slide.title}
-                                            <span className="relative inline-block">
-                                                {slide.highlight}
-                                                <span className="absolute bottom-1 left-0 w-full h-1 bg-primary"></span>
-                                            </span>
-                                            {slide.titleEnd}
-                                        </h1>
-                                        <p className="text-gray-200 text-sm md:text-base leading-relaxed mb-10 max-w-xl font-secondary border-l-2 border-white/20 pl-4">
-                                            {slide.description}
-                                        </p>
-
-                                        <Link
-                                            href={slide.link}
-                                            className="inline-flex items-center gap-4 group"
+                                    {index === currentSlide && (
+                                        <motion.div
+                                            initial="hidden"
+                                            animate="visible"
+                                            variants={{
+                                                hidden: { opacity: 0, y: 30 },
+                                                visible: {
+                                                    opacity: 1,
+                                                    y: 0,
+                                                    transition: {
+                                                        duration: 0.8,
+                                                        ease: "easeOut",
+                                                        staggerChildren: 0.2
+                                                    }
+                                                }
+                                            }}
                                         >
-                                            <span className="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors">
-                                                {slide.cta}
-                                            </span>
-                                            <span className="w-12 h-12 bg-primary flex items-center justify-center transition-transform duration-300 group-hover:bg-[#d68515]">
-                                                <ArrowRight className="w-5 h-5 text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-                                            </span>
-                                        </Link>
-                                    </div>
+                                            <motion.h1
+                                                variants={{
+                                                    hidden: { opacity: 0, y: 20 },
+                                                    visible: { opacity: 1, y: 0 }
+                                                }}
+                                                className="text-4xl md:text-5xl lg:text-[64px] font-bold leading-[1.1] mb-6 font-sans"
+                                            >
+                                                {slide.title}
+                                                <span className="relative inline-block mx-2">
+                                                    {slide.highlight}
+                                                    <motion.span
+                                                        initial={{ width: 0 }}
+                                                        animate={{ width: '100%' }}
+                                                        transition={{ delay: 1, duration: 0.8, ease: "easeInOut" }}
+                                                        className="absolute bottom-1 left-0 h-1 bg-primary"
+                                                    />
+                                                </span>
+                                                {slide.titleEnd}
+                                            </motion.h1>
+
+                                            <motion.p
+                                                variants={{
+                                                    hidden: { opacity: 0, x: -20 },
+                                                    visible: { opacity: 1, x: 0 }
+                                                }}
+                                                className="text-gray-200 text-sm md:text-base leading-relaxed mb-10 max-w-xl font-secondary border-l-2 border-primary/50 pl-4"
+                                            >
+                                                {slide.description}
+                                            </motion.p>
+
+                                            <motion.div
+                                                variants={{
+                                                    hidden: { opacity: 0, y: 20 },
+                                                    visible: { opacity: 1, y: 0 }
+                                                }}
+                                            >
+                                                <Link
+                                                    href={slide.link}
+                                                    className="inline-flex items-center gap-4 group"
+                                                >
+                                                    <span className="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors">
+                                                        {slide.cta}
+                                                    </span>
+                                                    <span className="w-12 h-12 bg-primary flex items-center justify-center transition-transform duration-300 group-hover:bg-[#d68515]">
+                                                        <ArrowRight className="w-5 h-5 text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                                                    </span>
+                                                </Link>
+                                            </motion.div>
+                                        </motion.div>
+                                    )}
                                 </div>
 
                                 {/* Play Button Area */}
                                 <div className="w-full lg:w-5/12 flex items-center justify-center lg:justify-start pl-0 lg:pl-12">
-                                    <button
-                                        className={`w-24 h-24 border border-white/50 flex items-center justify-center transition-all duration-300 group ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-50'} transition-all duration-700 delay-500`}
-                                        aria-label="Play Video"
-                                    >
-                                        <Play className="w-10 h-10 text-white fill-transparent stroke-[1] ml-1 group-hover:scale-110 transition-transform duration-300" />
-                                    </button>
+                                    {index === currentSlide && (
+                                        <motion.button
+                                            initial={{ opacity: 0, scale: 0.5 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{ delay: 0.6, duration: 0.5, type: "spring" }}
+                                            className="w-24 h-24 border border-white/50 flex items-center justify-center group"
+                                            aria-label="Play Video"
+                                        >
+                                            <Play className="w-10 h-10 text-white fill-transparent stroke-[1] ml-1 group-hover:scale-110 transition-transform duration-300" />
+                                        </motion.button>
+                                    )}
                                 </div>
                             </div>
                         </div>

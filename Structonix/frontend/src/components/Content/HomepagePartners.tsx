@@ -3,6 +3,7 @@
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { motion } from 'framer-motion';
 
 // Sample logos (using placeholders or text for now, or generic icons)
 // Ideally would use SVGs or images. Using placeholder text/shapes for structure.
@@ -50,16 +51,28 @@ export function HomepagePartners() {
     return (
         <section className="py-12 px-4 md:px-20 bg-[#F5F7FA] relative overflow-hidden">
             <div className="container mx-auto px-4">
-                <div className="mb-12">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="mb-12"
+                >
                     <div className="flex items-center gap-2 mb-4">
                         <span className="text-gray-400 font-bold tracking-widest text-sm">. Partners</span>
                     </div>
                     <h2 className="text-3xl md:text-5xl font-bold text-dark-slate max-w-xl leading-tight">
                         Partners who trust <br /> Industrium co
                     </h2>
-                </div>
+                </motion.div>
 
-                <div className="partner-slider">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2, duration: 0.8 }}
+                    className="partner-slider"
+                >
                     <Slider {...settings}>
                         {partners.map((partner) => (
                             <div key={partner.id} className="px-4">
@@ -74,7 +87,7 @@ export function HomepagePartners() {
                             </div>
                         ))}
                     </Slider>
-                </div>
+                </motion.div>
             </div>
         </section >
     );

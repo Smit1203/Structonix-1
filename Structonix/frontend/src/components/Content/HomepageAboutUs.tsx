@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function HomepageAboutUs() {
     return (
@@ -10,7 +11,13 @@ export function HomepageAboutUs() {
                 <div className="flex flex-col lg:flex-row gap-16 items-center">
 
                     {/* Left Column: Images (Overlapping Layout) */}
-                    <div className="w-full lg:w-1/2 relative min-h-[500px] flex items-center justify-center lg:justify-start">
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="w-full lg:w-1/2 relative min-h-[500px] flex items-center justify-center lg:justify-start"
+                    >
                         {/* Main Rectangle Image (Bottom Layer) */}
                         <div className="relative w-[85%] h-[400px] lg:h-[500px] ml-auto lg:ml-[15%]">
                             <img
@@ -28,10 +35,16 @@ export function HomepageAboutUs() {
                                 className="w-full h-full object-cover"
                             />
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Right Column: Text Content */}
-                    <div className="w-full lg:w-1/2 space-y-4">
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                        className="w-full lg:w-1/2 space-y-4"
+                    >
                         <div className="flex items-center gap-2">
                             <span className="w-1 h-1 rounded-full bg-primary"></span>
                             <span className="text-primary font-bold tracking-widest uppercase text-sm">About Industrium co</span>
@@ -57,7 +70,7 @@ export function HomepageAboutUs() {
                             More About Industrium
                             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                         </Link>
-                    </div>
+                    </motion.div>
 
                 </div>
             </div>

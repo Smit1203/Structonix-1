@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Slider from 'react-slick';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Re-using slick css from global or banner if not already globally imported, 
 // but usually it's good practice to ensure they are available.
@@ -82,7 +83,13 @@ export function HomepageProjects() {
             <div className="container mx-auto px-4 mb-16">
                 <div className="flex flex-col md:flex-row justify-between items-end gap-12">
                     {/* Header Left */}
-                    <div className="max-w-2xl">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="max-w-2xl"
+                    >
                         <div className="flex items-center gap-2 mb-4">
                             <span className="w-1 h-1 rounded-full bg-primary"></span>
                             <span className="text-primary font-bold tracking-widest uppercase text-xs">Projects</span>
@@ -97,7 +104,7 @@ export function HomepageProjects() {
                             More Projects
                             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                         </Link>
-                    </div>
+                    </motion.div>
 
                     {/* Header Right: Stats */}
                     <div className="flex items-center gap-4 hidden md:flex">
@@ -139,24 +146,32 @@ export function HomepageProjects() {
                                     </div>
 
                                     {/* Active State Card */}
-                                    {isActive && (
-                                        <div className="absolute bottom-0 left-0 bg-dark-navy p-8 md:p-12 w-full md:w-[85%] lg:w-[70%] max-w-xl z-30 animate-fade-in-up">
-                                            <span className="text-6xl md:text-7xl font-bold text-outline block mb-4" style={{ WebkitTextStrokeColor: '#F4991A' }}>
-                                                {project.number}
-                                            </span>
-                                            <h3 className="text-white text-2xl md:text-3xl font-bold mb-2 leading-tight">
-                                                {project.title}
-                                            </h3>
-                                            <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
-                                                {project.description}
-                                            </p>
-                                            {/* Arrow Bottom Right of Card */}
-                                            <div className="absolute bottom-0 right-0 w-12 h-12 flex items-center justify-center">
-                                                {/* Use a simple arrow icon or decorative lines */}
-                                                <ArrowUpRight className="w-6 h-6 text-primary" />
-                                            </div>
-                                        </div>
-                                    )}
+                                    <AnimatePresence>
+                                        {isActive && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 50 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: 20 }}
+                                                transition={{ duration: 0.5, ease: "easeOut" }}
+                                                className="absolute bottom-0 left-0 bg-dark-navy p-8 md:p-12 w-full md:w-[85%] lg:w-[70%] max-w-xl z-30"
+                                            >
+                                                <span className="text-6xl md:text-7xl font-bold text-outline block mb-4" style={{ WebkitTextStrokeColor: '#F4991A' }}>
+                                                    {project.number}
+                                                </span>
+                                                <h3 className="text-white text-2xl md:text-3xl font-bold mb-2 leading-tight">
+                                                    {project.title}
+                                                </h3>
+                                                <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+                                                    {project.description}
+                                                </p>
+                                                {/* Arrow Bottom Right of Card */}
+                                                <div className="absolute bottom-0 right-0 w-12 h-12 flex items-center justify-center">
+                                                    {/* Use a simple arrow icon or decorative lines */}
+                                                    <ArrowUpRight className="w-6 h-6 text-primary" />
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
 
                                     {/* Mobile only active info (always show something on mobile?) - simpler version */}
                                     <div className="md:hidden absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
