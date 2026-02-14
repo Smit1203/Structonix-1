@@ -21,7 +21,6 @@ export function MainNavbar() {
         { name: 'Home', href: '/' },
         { name: 'About Us', href: '/about' },
         { name: 'Projects', href: '/projects' },
-        { name: 'Blogs', href: '/blog' },
         { name: 'Contact Us', href: '/contact' },
     ];
 
